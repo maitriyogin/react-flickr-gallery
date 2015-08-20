@@ -1,8 +1,8 @@
 import React from 'react';
-import Photo from 'js/components/Photo';
+import Photo from './Photo';
 import {PHOTOSIZE} from '../Constants';
 
-import "styles/components/thumbnails";
+import 'styles/components/thumbnails';
 
 class Thumbnails extends React.Component{
     buildThumbnails(photos, selectedPhoto){

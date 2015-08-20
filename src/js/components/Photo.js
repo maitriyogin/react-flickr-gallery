@@ -5,7 +5,6 @@ import photoHelper from '../helpers/PhotoHelper';
 class Photo extends React.Component {
     selectMe(photo){
         ViewActionCreators.selectPhoto(photo);
-        console.log('selectMe');
     }
     render() {
         var {size, count, active} = this.props;
