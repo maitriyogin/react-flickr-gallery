@@ -1,5 +1,6 @@
 import React from 'react';
-import ViewActionCreators from 'js/actions/ViewActionCreators';
+import ViewActionCreators from '../actions/ViewActionCreators';
+import PagerHelper from '../helpers/PagerHelper';
 
 import "styles/components/pager";
 
@@ -9,40 +10,27 @@ class Pager extends React.Component {
         ViewActionCreators.loadPhotos( page.text, page.perpage, page.page);
     }
     pageLeft(page){
-        page.page --;
-        if(page.page <= 0) {
-            page.page = 1;
-        }
+        page = PagerHelper.pageLeft(page);
         ViewActionCreators.loadPhotos( page.text, page.perpage, page.page);
     }
     pageRight(page){
-        page.page ++;
-        var maxPages = Math.ceil(page.total / page.perpage);
-        if(page.page > maxPages) {
-            page.page = maxPages;
-        }
+        page = PagerHelper.pageRight(page);
         ViewActionCreators.loadPhotos( page.text, page.perpage, page.page);
     }
     pageStart(page){
-        page.page = 1;
+        page = PagerHelper.pageStart(page);
         ViewActionCreators.loadPhotos( page.text, page.perpage, page.page);
     }
     pageEnd(page){
-        page.page = Math.ceil(page.total / page.perpage);
+        page = PagerHelper.pageEnd(page);
         ViewActionCreators.loadPhotos( page.text, page.perpage, page.page);
     }
     render() {
         var {page} = this.props;
         
         var pages = [];
-        var totalPages = Math.ceil(page.total / page.perpage);
-        var start = page.page;
-        var end = page.maxPages + page.page;
-        if(end > totalPages +1){
-            end = totalPages+1;
-            var maxPages = totalPages < page.maxPages ? totalPages : page.maxPages;
-            start = end - maxPages;
-        }
+
+        var [start, end] = PagerHelper.pagePosition(page);
 
         for (let i=start; i<end; i++) {
             var key = `pageNo-${i}`;

@@ -7,10 +7,10 @@ class Photo extends React.Component {
         ViewActionCreators.selectPhoto(photo);
     }
     render() {
-        var {size, count, active} = this.props;
+        var {size, count, active, rowcount} = this.props;
         var style = `photo-${size}`;
-        style += count == 1 ? ' start':'';
-        style += count == 4 ? ' end':'';
+        style += count == 0 ? ' start':'';
+        style += count == rowcount-1 ? ' end':'';
         style += active ? ' active' : '';
         return (
           <div className={style} key={this.props.photo.id} onClick={this.selectMe.bind(this, this.props.photo)}> 

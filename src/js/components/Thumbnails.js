@@ -1,16 +1,18 @@
 import React from 'react';
 import Photo from './Photo';
-import {PHOTOSIZE} from '../Constants';
+import {PHOTOSIZE, ROWCOUNT} from '../Constants';
 
 import 'styles/components/thumbnails';
 
 class Thumbnails extends React.Component{
     buildThumbnails(photos, selectedPhoto){
-        var count = 1;
+        var count = 0;
+        var rowcount = photos.photo && photos.photo.length < ROWCOUNT ? photos.photo.length : ROWCOUNT;
         return photos.photo.map(function(thumbnail) {
-            count = count == 5 ? 1 : count;
+            count = count == rowcount ? 0 : count;
+            console.log('rowcount:' + rowcount + ', count:' + count)
             var active = selectedPhoto != null && thumbnail.id == selectedPhoto.id;
-            return (  <Photo photo={thumbnail} size={PHOTOSIZE.THUMBNAIL} key={thumbnail.id} count={count++} active={active}/>
+            return (  <Photo photo={thumbnail} size={PHOTOSIZE.THUMBNAIL} key={thumbnail.id} count={count++} rowcount={rowcount} active={active}/>
             );
         }, this)
     }

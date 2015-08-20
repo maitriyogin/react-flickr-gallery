@@ -13,6 +13,8 @@ module.exports = {
     LARGE : 'z'
   },
 
+  ROWCOUNT : 5,
+
   ENTER_KEY : 13,
 
   PAGING: keyMirror({
