@@ -10,7 +10,6 @@ class Thumbnails extends React.Component{
         var rowcount = photos.photo && photos.photo.length < ROWCOUNT ? photos.photo.length : ROWCOUNT;
         return photos.photo.map(function(thumbnail) {
             count = count == rowcount ? 0 : count;
-            console.log('rowcount:' + rowcount + ', count:' + count)
             var active = selectedPhoto != null && thumbnail.id == selectedPhoto.id;
             return (  <Photo photo={thumbnail} size={PHOTOSIZE.THUMBNAIL} key={thumbnail.id} count={count++} rowcount={rowcount} active={active}/>
             );

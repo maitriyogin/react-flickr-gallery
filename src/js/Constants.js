@@ -13,7 +13,7 @@ module.exports = {
     LARGE : 'z'
   },
 
-  ROWCOUNT : 5,
+  ROWCOUNT : 4,
 
   ENTER_KEY : 13,
 

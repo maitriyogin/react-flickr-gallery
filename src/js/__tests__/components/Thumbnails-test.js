@@ -11,7 +11,7 @@ var TestUtils = React.addons.TestUtils;
 
 describe('Thumbnails', function() {
 
-    it('can build x number of photos', function() {
+    it('can build x number of photos and that active photo is set', function() {
         var photos = {
             photos: {
                 photo: [
@@ -82,6 +82,7 @@ describe('Thumbnails', function() {
         //console.log(JSON.stringify(p1.className));
         //console.log(JSON.stringify(p2.className));
         //console.log(JSON.stringify(p3.className));
+        expect(p1.className.indexOf('active') > 0).toBeTruthy()
         expect(p1.className.indexOf('start') > 0).toBeTruthy();
         expect(p2.className.indexOf('start') == -1).toBeTruthy();
         expect(p2.className.indexOf('end') == -1).toBeTruthy();
@@ -89,7 +90,7 @@ describe('Thumbnails', function() {
 
     });
 
-    it('can build create the correct start and end class names with a row count of 2', function() {
+    it('can build create the correct start and end class names with a row count of 4 with 6 photos', function() {
         var photos = {
             photos: {
                 photo: [
@@ -201,7 +202,7 @@ describe('Thumbnails', function() {
 
         // test the classes
         var p1 = React.findDOMNode(photos[0]);
-        var p2 = React.findDOMNode(photos[1]);
+        var p4 = React.findDOMNode(photos[3]);
         var p5 = React.findDOMNode(photos[4]);
         var p6 = React.findDOMNode(photos[5]);
         //console.log(JSON.stringify(p1.className));
@@ -209,10 +210,8 @@ describe('Thumbnails', function() {
         //console.log(JSON.stringify(p5.className));
         //console.log(JSON.stringify(p6.className));
         expect(p1.className.indexOf('start') > 0).toBeTruthy();
-        expect(p2.className.indexOf('start') == -1).toBeTruthy();
-        expect(p2.className.indexOf('end') == -1).toBeTruthy();
-        expect(p5.className.indexOf('end') > 0).toBeTruthy();
-        expect(p6.className.indexOf('start') > 0).toBeTruthy();
+        expect(p4.className.indexOf('end') > 0).toBeTruthy();
+        expect(p5.className.indexOf('start') > 0).toBeTruthy();
 
     });
 
