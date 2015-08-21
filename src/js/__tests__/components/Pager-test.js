@@ -71,6 +71,7 @@ describe('Pager', function() {
         expect(page.page).toEqual(3);
 
         TestUtils.Simulate.click(two);
+
         expect(page.page).toEqual(2);
 
     });
