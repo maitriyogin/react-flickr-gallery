@@ -33,6 +33,7 @@ var PagingHelper = {
 			var maxPages = totalPages < page.maxPages ? totalPages : page.maxPages;
 			start = end - maxPages;
 		}
+		page.totalPages = totalPages;
 		return [start, end];
 	}
 };
