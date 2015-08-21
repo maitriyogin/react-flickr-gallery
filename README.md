@@ -6,37 +6,39 @@ The js is structured per component with seperate files for the dispatcher, store
 
 Styles
 ------
-After we spoke I thought I'd try something with sass, after all the talk of inline styles at 'react europe', I thought I'd try and get the styles as close to the components as possible.   Hence the mirrored sass and component files.
-
+The styling is done using sass with componitised sass files. Hence for every component theres a corresponding sass component that holds it's style.
 App
 ----
-The photos are mine, you may want to change the flickr api key in the FLICKR hash in Constants with your own ..  although it should work with mine.
-I'll try and add some more pics in the morning. 
+The photos are mine, you may want to change the flickr api key in the FLICKR hash in Constants with your own.
 
 Install/Run
 -----------
-If you have trouble with node or just want to jump straight in there's a distributable version in the dist dir.
-Just open up dist/index.html in your favourite browser ...
-
-I'm asusming you'v got node setup but if not and your on a mac:
-brew install node
-
 Follow these steps :
 
-1. Unzip the flickr bundle.
+Run
+-------
 
-2. cd tmflickr
+1. clone this repo
+
+2. cd react-flickr-gallery
 
 3. npm install
 
-4. npm start
+5. npm start
 
-5. open a browser on http://localhost:8080
+6. open a browser on http://localhost:8080
 
-I'v tested on chrome, firefox and safari on osx.
+Test
+-------
 
-For a distribution build:
-1. cd into tmflickr
+The tests are written in Jest.  Jest requires node 10.*, so if your on the cutting edge and have a later version of node
+then please install nvm.
+nvm, will enable you to install different node versions.
+
+Distribution
+------------
+
+1. cd into react-flickr-gallery
 2. run the following : NODE_ENV=production UV_THREADPOOL_SIZE=100 webpack -p
 3. you should end up with a app.css, app.js and index.html in the dist dir.  You can directly open the index.html and the app should run.
 4. open dist/index.html in a browser directly...
