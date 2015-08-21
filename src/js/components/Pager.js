@@ -34,12 +34,13 @@ class Pager extends React.Component {
 
         for (let i=start; i<end; i++) {
             var key = `pageNo-${i}`;
-            var activePage = i==page.page?'active':'';
-            pages.push(<a href='#' className={activePage} onClick={this.page.bind(this, page,i)} key={key}> {i} </a>);
+            var style = 'goToPage';
+            style += i==page.page?' active':'';
+            pages.push(<a href='#' className={style} onClick={this.page.bind(this, page,i)} key={key} role='goToPage'> {i} </a>);
         }
 
         return (
-            <div className='pagerContainer'>
+            <nav className='pagerContainer' role='pager'>
                 <div/>
                 <div className='pager'>
                     <a href='#' onClick={this.pageStart.bind(this, page)}> {'<<'} </a>
@@ -48,7 +49,7 @@ class Pager extends React.Component {
                     <a href='#' onClick={this.pageRight.bind(this, page)}> {'>'} </a>
                     <a href='#' onClick={this.pageEnd.bind(this, page)}> {'>>'} </a>
                 </div>
-            </div>
+            </nav>
         );
     }
 };
