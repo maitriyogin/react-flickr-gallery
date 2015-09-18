@@ -21,7 +21,7 @@ var sassLoaders = [
 
 module.exports = {
 
-  devtool: 'eval',
+  devtool: 'source-map',
 
   entry: { app:['./src/'+index]},
 
