@@ -8,7 +8,7 @@
     "test": "BABEL_JEST_STAGE=0 jest",
     "start": "env UV_THREADPOOL_SIZE=100 webpack-dev-server --inline --content-base build",
     "build": "NODE_ENV=production UV_THREADPOOL_SIZE=100 webpack -p --config webpack.production.config.js",
-    "postinstall": "node deploy"
+    "postinstall": "NODE_ENV=production node deploy"
   },
   "license": "ISC",
   "jest": {
