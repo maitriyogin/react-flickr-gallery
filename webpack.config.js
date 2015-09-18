@@ -2,7 +2,7 @@ var fs = require('fs');
 var fileExists = fs.existsSync;
 var mkdirp = require('mkdirp');
 var path = require('path');
-var webpack = require('webpack');
+var Webpack = require('webpack');
 var React = require('react');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
@@ -11,6 +11,8 @@ var IGNORE = ['shared'];
 
 var galleries = process.env.NODE_ENV === 'galleries';
 var index = galleries ? 'index_2' : 'index';
+var buildPath = path.resolve(__dirname, 'build');
+var appPath = path.resolve(__dirname, 'src');
 
 makeIndex('app');
 
@@ -22,14 +24,18 @@ var sassLoaders = [
 
 module.exports = {
 
-  devtool: 'eval',
+  context: __dirname,
+  devtool: 'eval-source-map',
 
-  entry: { app:['./src/'+index]},
+  entry: [
+    'webpack-dev-server/client?http://localhost:3000', 
+    'webpack/hot/dev-server', 
+    path.resolve(appPath, 'index.js')],
 
   output: {
-    filename: "[name].js",
-    path: './build',
-    publicPath: "/",
+    path: buildPath,
+    filename: 'app.js',
+    publicPath: '/build/'
   },
 
   resolve: {
@@ -50,7 +56,8 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin("[name].css")
+    new ExtractTextPlugin("app.css"),
+    new Webpack.HotModuleReplacementPlugin()
   ]
 
 };

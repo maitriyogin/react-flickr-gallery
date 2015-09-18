@@ -1,17 +1,30 @@
 var fs = require('fs');
+var rmdir = require( 'rmdir' );
 var fileExists = fs.existsSync;
 var mkdirp = require('mkdirp');
 var path = require('path');
 var webpack = require('webpack');
 var React = require('react');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var nodeModulesPath = path.resolve(__dirname, 'node_modules');
+var buildPath = path.resolve(__dirname, 'dist');
+var mainPath = path.resolve(__dirname, 'src', 'index.js');
 
 var CODE = __dirname;
 var IGNORE = ['shared'];
 
 var index = 'index';
 
-makeIndex('app');
+// remove dist
+if(fs.existsSync(buildPath)){
+  rmdir(buildPath, function ( err, dirs, files ){
+  console.log( dirs );
+  console.log( files );
+  console.log( 'all files are removed' );
+  fs.mkdirSync(buildPath);
+  makeIndex('app');
+});
+}
 
 var sassLoaders = [
   "css-loader",
@@ -23,12 +36,11 @@ module.exports = {
 
   devtool: 'source-map',
 
-  entry: { app:['./src/'+index]},
+  entry: mainPath,
 
   output: {
-    filename: "[name].js",
-    path: './dist',
-    publicPath: "/",
+    path: buildPath,
+    filename: "app.js"
   },
 
   resolve: {
@@ -49,7 +61,7 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin("[name].css")
+    new ExtractTextPlugin("app.css")
   ]
 
 };
