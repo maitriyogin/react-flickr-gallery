@@ -9,8 +9,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CODE = __dirname;
 var IGNORE = ['shared'];
 
-var galleries = process.env.NODE_ENV === 'galleries';
-var index = galleries ? 'index_2' : 'index';
+var index = 'index';
 
 makeIndex('app');
 
@@ -28,7 +27,7 @@ module.exports = {
 
   output: {
     filename: "[name].js",
-    path: './build',
+    path: './dist',
     publicPath: "/",
   },
 
@@ -56,12 +55,8 @@ module.exports = {
 };
 
 function makeIndex(dir) {
-  var index = './build/index.html'
-  if(galleries){
-    fs.writeFileSync(index, makeGalleries('app'));
-  } else {
-    fs.writeFileSync(index, makeMarkup('app'));  
-  }
+  var index = './dist/index.html';
+  fs.writeFileSync(index, makeMarkup('app'));  
 }
 
 function makeMarkup(mainFile) {
@@ -70,19 +65,6 @@ function makeMarkup(mainFile) {
       React.DOM.link({ rel: 'stylesheet', href: './' + mainFile + '.css' }),
       React.DOM.body({},
         React.DOM.div({ id: 'app' }),
-        React.DOM.script({ src: './' + mainFile + '.js' })
-      )
-    )
-  ));
-}
-
-function makeGalleries(mainFile) {
-  return React.renderToStaticMarkup((
-    React.DOM.html({},
-      React.DOM.link({ rel: 'stylesheet', href: './' + mainFile + '.css' }),
-      React.DOM.body({},
-        React.DOM.div({ id: 'gallery1' }),
-        React.DOM.div({ id: 'gallery2' }),
         React.DOM.script({ src: './' + mainFile + '.js' })
       )
     )
